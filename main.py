@@ -146,15 +146,15 @@ def convert_to_wav(file_dir, file_list, output_dir):
 def convert_to_aac(file_dir, file_list, output_dir):
     total = len(file_list)
     iteration = 0
-    qaac_exec = Path.joinpath(Path(TOOLS_DIR).resolve(), "qaac" + EXECUTABLE_EXTENSION)
+    neroaac_exec = Path.joinpath(Path(TOOLS_DIR).resolve(), "neroAacEnc" + EXECUTABLE_EXTENSION)
     file_dir_abs = Path(file_dir).resolve()
     output_dir_abs = Path(output_dir).resolve()
     for file_name in file_list:
         iteration += 1
         show_progress(iteration, total, "", "Converting to AAC")
-        file = Path.joinpath(file_dir_abs, file_name)
+        file = Path.joinpath(file_dir_abs, file_name.split(".")[0] + ".wav")
         output_file = Path.joinpath(output_dir_abs, file.stem + ".m4a")
-        subprocess.call([qaac_exec, "--tvbr", 110, "-o", output_file])
+        subprocess.call([neroaac_exec, "-q", "0.69", "-if", file,"-of",output_file])
 
 def show_progress(iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
     percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
@@ -173,9 +173,12 @@ def check_temp_folders():
         if not os.path.exists(folder):
             os.makedirs(folder)
 
-def delete_temp_files():
-    print("Deleting temporary files")
-    folders = [WAV_DIR, ORIGINAL_DECODE_DIR, NEW_DECODE_DIR, NEW_DIR]
+def delete_temp_files(new_file_flag):
+    print("Deleting existing temporary files")
+    if new_file_flag:
+        folders = [WAV_DIR, ORIGINAL_DECODE_DIR, NEW_DECODE_DIR, NEW_DIR]
+    elif not new_file_flag:
+        folders = [WAV_DIR, ORIGINAL_DECODE_DIR, NEW_DECODE_DIR]
 
     for folder in folders:
         for filename in os.listdir(folder):
@@ -197,14 +200,16 @@ def main():
 
     args = parser.parse_args()
     
-    hdiff_flag = args.hdiff
+    hdiff_flag = args.no_hdiff
 
     check_temp_folders()
     
     if hdiff_flag:
+        delete_temp_files(hdiff_flag)
         file_list = walk_dir(HDIFF_DIR) # Gets list of all .hdiff files
         hpatch_files(ORIGINAL_DIR, HDIFF_DIR, NEW_DIR, file_list) # Patch all Wwise PCK audio files
     elif not hdiff_flag:
+        delete_temp_files(hdiff_flag)
         if not os.listdir(NEW_DIR):
             print(f"{NEW_DIR} is empty.")
             return
@@ -216,7 +221,7 @@ def main():
     convert_to_wav(NEW_DECODE_DIR, new_file_list, WAV_DIR) # Convert all new audio files to WAV
     convert_to_aac(WAV_DIR, new_file_list, OUTPUT_DIR) # Convert all WAV to AAC
     
-    delete_temp_files()
+    delete_temp_files(hdiff_flag)
     print("Finished!")
 
 if __name__ == "__main__":
