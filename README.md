@@ -14,7 +14,7 @@ Uses Hdiff to patch pck files, then searches through files to find any new music
 
 ### Note
 
-The output is coded as ` qaac --tvbr 110`, because WAV is a waste of disk space, and MP3, OGG are weak. Note that all temperary files under the  `./Temp `folder as well as those under the `./New Game Files` will be deleted after the output.
+The output is coded as ` qaac --tvbr 110`, because WAV is a waste of disk space, and MP3, OGG are weak. Note that all temporary files under the  `./Temp `folder as well as those under the `./New Game Files` will be deleted after the output.
 
 ---
 
