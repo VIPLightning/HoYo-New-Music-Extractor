@@ -12,11 +12,7 @@ Uses Hdiff to patch pck files, then searches through files to find any new music
 
 ### Note
 
-<<<<<<< HEAD
-The output is coded as ` neroAacEnc -q 0.69`, because WAV is a waste of disk space, and MP3, OGG are weak. Note that all temperary files under the  `./Temp `folder as well as those under the `./New Game Files` will be deleted after the output.
-=======
-The output is coded as ` qaac --tvbr 110`, because WAV is a waste of disk space, and MP3, OGG are weak. Note that all temporary files under the  `./Temp `folder as well as those under the `./New Game Files` will be deleted after the output.
->>>>>>> 693db67e13fab0bb099ff5fbfa1278d3ef494b99
+The output is coded as ` neroAacEnc -q 0.69`, because WAV is a waste of disk space, and MP3, OGG are weak. Note that all temporary files under the  `./Temp `folder will be deleted after the output.
 
 ---
 
