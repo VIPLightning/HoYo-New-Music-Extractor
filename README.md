@@ -12,7 +12,7 @@ Uses Hdiff to patch pck files, then searches through files to find any new music
 
 ### Note
 
-The output is coded as ` neroAacEnc -q 0.69`, because WAV is a waste of disk space, and MP3, OGG are weak. Note that all temporary files under the  `./Temp `folder will be deleted after the output.
+The output is coded as `neroAacEnc -q 0.69`, because WAV is a waste of disk space, and MP3, OGG are weak. Note that all temporary files under the  `./Temp `folder will be deleted after the output.
 
 ---
 
