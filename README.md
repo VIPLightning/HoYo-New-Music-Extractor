@@ -6,7 +6,7 @@ Uses Hdiff to patch pck files, then searches through files to find any new music
 
 1. Put `.hdiff` files in the `./Hdiff Files` folder, and put all of your original game pck files in the `./Original Game Files` .
 2. Run the script by `python main.py`.
-3. If you don't have `.hdiff` files but have new game files which you want to compare and filter, then put all new files in the `./New Game Files` folder, and run the script by `python main.py --no-hdiff`.
+3. If you don't have `.hdiff` files but have new game pck files which you want to compare and filter, then put all new files in the `./New Game Files` folder, and run the script by `python main.py --no-hdiff`.
 
 ---
 
