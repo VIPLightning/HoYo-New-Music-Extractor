@@ -152,7 +152,7 @@ def convert_to_aac(file_dir, file_list, output_dir):
     for file_name in file_list:
         iteration += 1
         show_progress(iteration, total, "", "Converting to AAC")
-        file = Path.joinpath(file_dir_abs, file_name.split(".")[0] + ".wav")
+        file = Path.joinpath(file_dir_abs, file_name[:-4] + ".wav")
         output_file = Path.joinpath(output_dir_abs, file.stem + ".m4a")
         subprocess.call([neroaac_exec, "-q", "0.69", "-if", file,"-of",output_file])
 
